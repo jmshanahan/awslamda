@@ -1,0 +1,7 @@
+# package directories
+node_modules
+.dynamodb
+jspm_packages
+
+# Serverless directories
+.serverless

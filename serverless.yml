@@ -1,0 +1,32 @@
+
+service: yelp-scraper
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: eu-west-1
+
+  environment:
+    DYNAMODB_TABLE: yelp-rating
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+package:
+  include:
+    - utils/**
+
+functions:
+  scrape:
+    handler: handler.scrape
+
