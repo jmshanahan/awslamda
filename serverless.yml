@@ -3,6 +3,7 @@ service: yelp-scraper
 plugins:
   - serverless-dynamodb-local
   - serverless-offline
+  - serverless-offline-scheduler
 provider:
   name: aws
   runtime: nodejs8.10
@@ -12,7 +13,11 @@ provider:
   environment:
     DYNAMODB_TABLE: yelp-rating
   iamRoleStatements:
-    - Effect: "Allow"
+    - Effect: Allow
+      Action:
+        - "Lamda:InvokeFunction"
+      Resource: "*"
+    - Effect: Allow
       Action:
         - dynamodb:Query
         - dynamodb:Scan
@@ -29,4 +34,9 @@ package:
 functions:
   scrape:
     handler: handler.scrape
+  launch_scrapers:
+    handler: handler.launch_scrapers
+    event:
+      - schedule: rate(1 minute)
+
 

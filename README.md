@@ -30,3 +30,13 @@ But to get to work I need to set them to default. I know this is a hack but I wa
 [default]
 aws_access_key_id = XXXXXXXXXXXXXXXX
 aws_secret_access_key = XXXXXXXXXXXXXXXX
+
+I've just discovered one possible reason why I had the permission issue was because in my serverless config file I had
+Effect: "Allow"
+instead of 
+Effect: Allow
+
+I didnt actually get the scheduler going. I lost interest when I could not deploy it onto the cloud.
+
+## Acknologment
+Taken from udemy course The Serverless Franework with Node.js and AWS. Course is recommended by me if you are starting out on the serverless platform.

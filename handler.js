@@ -17,6 +17,12 @@ module.exports.scrape = (event, context , callback) => {
       input: event,
     }),
   };
-
-
 };
+
+module.exports.scrape = (event, context , callback) => {
+  const fakeDatabaseResults = ["bestia-los-angeles","république-los-angeles-2","the-morrison-los-angeles"];
+  
+  fakeDatabaseResults.forEach( businessName => 
+  deployScrapers(businessName));
+
+}
